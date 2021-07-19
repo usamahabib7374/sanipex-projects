@@ -1,0 +1,34 @@
+.projects > ul {
+   list-style: none;
+   padding: 0;
+}
+.projects > ul li {
+   padding: 10px 5px;
+   margin: 0;
+   background-color: #fff;
+   border-bottom: 1px #c4c1bc solid;
+   display: inline-block;
+   width: 100%;
+}
+.projects > ul li:last-child {
+   border-bottom: none;
+}
+.projects-list {
+   float: left;
+   position: relative;
+   margin-left: 10px;
+   width: 100%;
+}
+.projects-list a.projects-title {
+   font-weight: bold;
+}
+.projects-list a.projects-title:hover {
+   text-decoration: none;
+}
+.block-projects .block-title {
+   margin: 0px 0px 20px;
+}
+.block-projects-heading {
+   font-size: 18px;
+   font-weight: 300;
+}

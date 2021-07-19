@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Sanipex_Projects::projects" title="Projects" module="Sanipex_Projects" sortOrder="20" parent="Sanipex_Brochures::brochures" resource="Sanipex_Projects::projects" />
+        <add id="Sanipex_Projects::add_projects" title="Add Project" module="Sanipex_Projects" sortOrder="1" parent="Sanipex_Projects::projects" action="projects/index/newAction" resource="Sanipex_Projects::manage_projects" />
+        <add id="Sanipex_Projects::manage_projects" title="Manage Projects" module="Sanipex_Projects" sortOrder="1" parent="Sanipex_Projects::projects" action="projects/index/index" resource="Sanipex_Projects::manage_projects" />
+    </menu>
+</config>
+  

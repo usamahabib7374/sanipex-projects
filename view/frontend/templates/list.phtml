@@ -1,0 +1,81 @@
+<?php
+$mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'projects/tmp/projects/';
+$projectsCollection = $block->getCollection();
+$countryArr = $block->getCountryArr();
+?>
+<style>
+    .projects ol {
+        list-style: none;
+        padding-left: 0;
+    }
+    .projects ol li {
+        margin-bottom: 20px;
+    }
+    .projects-list-content img {
+        max-width: 100%;
+    }
+</style>
+<div class="projects">
+    <?php
+    if ($projectsCollection->getSize() > 0) :
+        ?>
+        <div class="toolbar top">
+            <?php echo $block->getPagerHtml(); ?>
+        </div>
+        <div class="big-demo go-wide" data-js="filtering-demo">
+            <div class="filter-button-group button-group js-radio-button-group">
+                <button class="button is-checked" data-filter="*">All</button>
+                <?php foreach ($countryArr as $filter => $country) : ?>
+                    <button class="button" data-filter=".<?= $filter ?>"><?= $country ?></button>
+                <?php endforeach; ?>
+            </div>
+            <div class="container">
+                <ol class="row grid">
+                    <?php foreach ($projectsCollection as $projects) : ?>
+                        <li class="tp-4-col col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 element-item <?= $projects->getData('project-country') ?>" data-category="<?= $projects->getData('project-country') ?>">
+                            <div class="project">
+                                <div class="projects-list-image" style="width:100%;height:320px;background: url('<?php echo $mediaUrl . $projects->getData('thumbnail'); ?>') 50% 50%;background-size: cover;">
+                                </div>
+                                <?php ?>
+                                <?php if ($projects->getData('url_key') !== ''): ?>
+                                    <a class="projects-title" href="<?php echo "/projects/" . $projects->getData('url_key') ?>"><?php echo $projects->getTitle() ?></a> 
+                                <?php else: ?> 
+                                    <p><?php echo $projects->getTitle() ?></p>
+                                <?php endif ?>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="toolbar-bottom">
+            <div class="toolbar bottom">
+                <?php echo $block->getPagerHtml(); ?>
+            </div>
+        </div>
+    <?php else : ?>
+        <p><?php echo __('No projects!') ?></p>
+    <?php endif; ?>
+</div>
+
+<script>
+    requirejs(['require', 'jquery', 'isotope'],
+            function (require, $, Isotope) {
+                // require jquery-bridget, it's included in isotope.pkgd.js
+                require(['jquery-bridget/jquery-bridget'],
+                        function (jQueryBridget) {
+                            // make Isotope a jQuery plugin
+                            jQueryBridget('isotope', Isotope, $);
+                            // now you can use $().isotope()
+                            $('.grid').isotope({});
+                            
+                            $('.filter-button-group').on('click', 'button', function () {
+                               var filterValue = $(this).attr('data-filter');
+//                               console.log(filterValue);
+                                $('.grid').isotope({filter: filterValue});
+                            });
+                        }
+                );
+            });
+</script>

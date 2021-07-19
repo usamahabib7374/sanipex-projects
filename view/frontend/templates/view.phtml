@@ -1,0 +1,11 @@
+<?php
+$projects = $block->getProjectsInformation();
+$mainImages = json_decode($projects->getData('main-image'), true);
+?>
+<div class="mw-projects">
+    <?php echo $projects->getDescription() ?>
+    <?php echo $projects->getData('short_description') ?>
+    <?php foreach ($mainImages as $image): ?>
+        <img src="<?php echo $block->getMediaPath() . $image; ?>"/>
+    <?php endforeach; ?>
+</div>
